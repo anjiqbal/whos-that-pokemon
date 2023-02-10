@@ -13,6 +13,11 @@
 img{
   display: block;
   margin: 0 auto;
+  
+    transform: scale(2.5);
+    filter: brightness(0);
+    transition: filter .5s ease-out;
+  
 }
 
 body {

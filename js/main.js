@@ -1,11 +1,12 @@
 //Example fetch using pokemonapi.co
-document.querySelector('button').addEventListener('click', getFetch)
+document.querySelector('#play').addEventListener('click', getFetch)
+document.querySelector('#check').addEventListener('click', checkAnswer)
 
 function getFetch(){
-  // const poke1 = document.querySelector('#poke1').value
-  // const poke2 = document.querySelector('#poke2').value
-  const url = 'https://pokeapi.co/api/v2/pokemon/'
-  //const url2 = 'https://pokeapi.co/api/v2/pokemon/'+poke2
+  let randomNum = Math.floor(Math.random() * 1008)
+  const url = 'https://pokeapi.co/api/v2/pokemon/'+randomNum
+
+ 
   let pokeStore = []
   let pokeImg = []
 
@@ -14,26 +15,22 @@ function getFetch(){
       .then(res => res.json()) // parse response as JSON
       .then(data => {
         console.log(data)
+        const pokemonName = data.name
+        //document.querySelector('h1').innerText = pokemonName
+        document.querySelector('img').src = data.sprites.front_default
 
-        pokeStore.push(data.types[0].type.name)
-        pokeImg.push(data.sprites.front_shiny)
+        // pokeStore.push(data.types[0].type.name)
+        // pokeImg.push(data.sprites.front_shiny)
+        // pokeStore.push(data.types[0].type.name)
+        // pokeImg.push(data.sprites.front_shiny)
+    
+        // if((pokeStore[0] === "grass" && pokeStore[1] === 'water')){
+        //   document.querySelector('#pokeImg1').src = pokeImg[0]
+        //   document.querySelector('#pokeImg2').src = pokeImg[1]
+        //   document.querySelector('h2').innerText = " 2x > "
+        // }
         
-        fetch(url2)
-        .then(res => res.json()) // parse response as JSON
-        .then(data => {
-
-          pokeStore.push(data.types[0].type.name)
-          pokeImg.push(data.sprites.front_shiny)
-      
-          if((pokeStore[0] === "grass" && pokeStore[1] === 'water')){
-            document.querySelector('#pokeImg1').src = pokeImg[0]
-            document.querySelector('#pokeImg2').src = pokeImg[1]
-            document.querySelector('h2').innerText = " 2x > "
-          }
-        })
-        .catch(err => {
-            console.log(`error ${err}`)
-        });
+        
 
 
       })
@@ -41,10 +38,9 @@ function getFetch(){
           console.log(`error ${err}`)
       });
 
-
-
-      
 }
+
+
 
 
 
