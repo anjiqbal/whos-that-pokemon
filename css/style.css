@@ -6,26 +6,103 @@
 *{
   box-sizing: border-box;
 }
+html {
+  height: 100%;
+  font-size: 62.5%;
+}
+
 
 /******************************************
 /* LAYOUT
 /*******************************************/
-img{
-  display: block;
-  margin: 0 auto;
-  
-    transform: scale(2.5);
-    filter: brightness(0);
-    transition: filter .5s ease-out;
-  
+
+main {
+  padding: 2%;
+  width: 70vw;
+  height: 90vh;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2B2E4A;
+  box-shadow: 0 3px 20px rgb(0 0 0 / 0.2);
 }
 
 body {
-  background-image: url('../img/background-image.webp');
-   background-size: cover;
-   background-repeat: no-repeat;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #FDEBED;
+  height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #53354A;
 }
 
+img{
+  /* height: 300px;
+  width: 300px; */
+  display: block;
+  margin: 45% auto 0 auto; 
+    transform: scale(3.5);
+    filter: brightness(0);
+    transition: filter .5s ease-out;
+}
+
+.pokemonImage {
+
+  display: block;
+  margin: 0 auto;
+  height: 30%;
+  width: 60%;
+  background-color: #2B2E4A;
+}
+
+.imageSection {
+  height: 100%;
+  width: 50%;
+  border: 4px solid #31355b;
+}
+.gameSection {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: 80%;
+
+}
+
+input,
+#check,
+#playAgain {
+  display: block;
+  font-size: 2rem;
+}
+h1{
+  font-size: 3rem;
+  height: 50px;
+  width: 100%;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2rem;
+  height: 30px;
+}
+
+.score {
+
+  height: 40%;
+  width: 35%;
+  border: 4px solid #31355b;
+}
+
+.time {
+
+  height: 40%;
+  width: 35%;
+  border: 4px solid #31355b;
+}
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
