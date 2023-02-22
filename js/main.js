@@ -1,7 +1,12 @@
 //Example fetch using pokemonapi.co
 
 
-document.querySelector('#check').addEventListener('click', checkAnswer)
+document.querySelector('#input').addEventListener('keyup', function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault()
+    checkAnswer()
+  }
+})
 document.querySelector('#playAgain').addEventListener('click', reload)
 let randomNum = Math.floor(Math.random() * 1008)
 const url = 'https://pokeapi.co/api/v2/pokemon/'+randomNum
@@ -23,19 +28,22 @@ let pokemonName
 
 
 function checkAnswer() {
-  console.log('hello')
+  
   let guess = document.querySelector('input').value
   document.querySelector('img').style.filter = 'none'
   document.querySelector('img').style.transition = 'none'
   if(guess === pokemonName){
     document.querySelector('#guessResult').innerText = 'You got it!'
         document.querySelector('#answer').innerText = `It's ${pokemonName}!`
+        document.querySelector('input').innerText = ''
     return true
   } else {
     document.querySelector('#guessResult').innerText = 'Wrong'
     document.querySelector('#answer').innerText = `The correct answer is ${pokemonName}`
+    document.querySelector('input').value = ''
     return false
   }
+
 
 }
 
