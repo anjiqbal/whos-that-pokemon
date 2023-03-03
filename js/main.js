@@ -1,53 +1,106 @@
-//Example fetch using pokemonapi.co
 
-
+// checks answer on pressing enter (key 13)
 document.querySelector('#input').addEventListener('keyup', function(event) {
   if (event.keyCode === 13) {
     event.preventDefault()
     checkAnswer()
   }
 })
+
+document.querySelector('#start').addEventListener('click', startGame)
 document.querySelector('#playAgain').addEventListener('click', reload)
-let randomNum = Math.floor(Math.random() * 1008)
-const url = 'https://pokeapi.co/api/v2/pokemon/'+randomNum
+
+
 let pokemonName 
+let questionCount = 0
+let wins = 0
+let losses = 0
+let start 
+let totalQuestions = 1
+
+function startGame(){
+  fetchPokemon()
+  start = Date.now()
+  document.querySelector('.wins').innerText = wins
+  document.querySelector('.losses').innerText = losses
+}
 
 
-
+function fetchPokemon(){
+  let randomNum = Math.floor(Math.random() * 1008)
+  const url = 'https://pokeapi.co/api/v2/pokemon/'+randomNum
   fetch(url)
 
-      .then(res => res.json()) // parse response as JSON
-      .then(data => {
-        console.log(data)
-        pokemonName = data.name
-        document.querySelector('img').src = data.sprites.front_default
-      })
-      .catch(err => {
-          console.log(`error ${err}`)
-      });
+  .then(res => res.json()) // parse response as JSON
+  .then(data => {
+    pokemonName = data.name
+    console.log(pokemonName)
+    document.querySelector('img').src = data.sprites.front_default
+  })
+  .catch(err => {
+      console.log(`error ${err}`)
+  });
 
+}
 
 function checkAnswer() {
+  questionCount++
+  document.querySelector('img').classList.add('show')
   
   let guess = document.querySelector('input').value
-  document.querySelector('img').style.filter = 'none'
-  document.querySelector('img').style.transition = 'none'
+  
+  // document.querySelector('img').style.filter = 'none'
+  // document.querySelector('img').style.transition = 'none'
   if(guess === pokemonName){
-    document.querySelector('#guessResult').innerText = 'You got it!'
-        document.querySelector('#answer').innerText = `It's ${pokemonName}!`
-        document.querySelector('input').innerText = ''
-    return true
+      wins++
+      document.querySelector('#guessResult').innerText = 'You got it!'
+      document.querySelector('#answer').innerText = `It's ${pokemonName}!`
+      document.querySelector('input').value = ''
+      document.querySelector('.wins').innerText = wins
+      if(questionCount <= totalQuestions){
+        setTimeout(nextQuestion, 3000)
+      }else {
+        gameOver()
+      }
+      
+     
+      return true
   } else {
-    document.querySelector('#guessResult').innerText = 'Wrong'
-    document.querySelector('#answer').innerText = `The correct answer is ${pokemonName}`
-    document.querySelector('input').value = ''
-    return false
+      losses++
+      document.querySelector('#guessResult').innerText = 'Wrong'
+      document.querySelector('#answer').innerText = `The correct answer is ${pokemonName}`
+      document.querySelector('input').value = ''
+      document.querySelector('.losses').innerText = losses
+      if(questionCount <= totalQuestions){
+        setTimeout(nextQuestion, 3000)
+      }else {
+        gameOver()
+      }
+      
+      return false
   }
 
 
 }
 
+function nextQuestion() {
+  clearAnswerAndGuess()
+  document.querySelector('img').classList.toggle('show')
+  setTimeout(fetchPokemon, 1000)
+}
+
+function gameOver(){
+  document.querySelector('.gameOver').innerText = `Game Over! \nYou scored ${wins} out of ${totalQuestions + 1}`
+  let end = Date.now()
+  let timeTaken = (end - start) / 1000
+  document.querySelector('.time').innerText = `You took ${Math.round(timeTaken)} seconds`
+}
 
 function reload() {
   location.reload()
+}
+
+function clearAnswerAndGuess(){
+  document.querySelector('#guessResult').innerText = ''
+  document.querySelector('#answer').innerText = ''
 }

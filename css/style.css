@@ -24,7 +24,7 @@ main {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-color: #2B2E4A;
+  background-color: #567189;
   box-shadow: 0 3px 20px rgb(0 0 0 / 0.2);
 }
 
@@ -35,7 +35,7 @@ body {
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: #53354A;
+    background-color: #7B8FA1;
 }
 
 img{
@@ -48,25 +48,33 @@ img{
     transition: filter .5s ease-out;
 }
 
+.show {
+  filter: none;
+  transition: none;
+}
+
 .pokemonImage {
 
   display: block;
   margin: 0 auto;
   height: 30%;
   width: 60%;
-  background-color: #2B2E4A;
+  background-color: #7B8FA1;
 }
 
 .imageSection {
   height: 100%;
   width: 50%;
-  border: 4px solid #31355b;
+  
+  background-color: #7B8FA1;
+  border-radius: 25px;
 }
 .gameSection {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-content: space-around;
   width: 100%;
   height: 80%;
 
@@ -74,9 +82,12 @@ img{
 
 input,
 #check,
-#playAgain {
+button {
   display: block;
   font-size: 2rem;
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
 }
 h1{
   font-size: 3rem;
@@ -86,22 +97,39 @@ h1{
 }
 
 h2 {
+  padding: 1rem;
   font-size: 2rem;
   height: 30px;
 }
 
-.score {
-
+.time {
+  background-color: #7B8FA1;
   height: 40%;
-  width: 35%;
-  border: 4px solid #31355b;
+  width: 40%;
+  border-radius: 25px;
+  font-size: 2rem;
 }
 
-.time {
-
+.score {
+  background-color: #7B8FA1;
   height: 40%;
-  width: 35%;
-  border: 4px solid #31355b;
+  width: 40%;
+  padding: 2rem;
+  border-radius: 25px;
+}
+
+input {
+  border: none;
+  padding: 1rem;
+  font-size: 2rem;
+  margin: 0 auto;
+  background-color: #EEEEEE;
+}
+
+#start {
+  background-color: #f7bf7a;
+  margin: 0 auto;
+  margin-top: 2rem;
 }
 /******************************************
 /* ADDITIONAL STYLES
