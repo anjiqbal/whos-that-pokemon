@@ -1,11 +1,13 @@
 
 // checks answer on pressing enter (key 13)
-document.querySelector('#input').addEventListener('keyup', function(event) {
+
+
+function onEnter(event){
   if (event.keyCode === 13) {
     event.preventDefault()
     checkAnswer()
   }
-})
+}
 
 document.querySelector('#start').addEventListener('click', startGame)
 document.querySelector('#playAgain').addEventListener('click', reload)
@@ -16,13 +18,16 @@ let questionCount = 0
 let wins = 0
 let losses = 0
 let start 
-let totalQuestions = 1
+let totalQuestions = 4
+let clock = new Clock({template: 's'});
 
 function startGame(){
+  document.querySelector('#input').addEventListener('keyup', onEnter)
   fetchPokemon()
   start = Date.now()
   document.querySelector('.wins').innerText = wins
   document.querySelector('.losses').innerText = losses
+  clock.start()
 }
 
 
@@ -58,7 +63,7 @@ function checkAnswer() {
       document.querySelector('input').value = ''
       document.querySelector('.wins').innerText = wins
       if(questionCount <= totalQuestions){
-        setTimeout(nextQuestion, 3000)
+        setTimeout(nextQuestion, 1000)
       }else {
         gameOver()
       }
@@ -72,9 +77,10 @@ function checkAnswer() {
       document.querySelector('input').value = ''
       document.querySelector('.losses').innerText = losses
       if(questionCount <= totalQuestions){
-        setTimeout(nextQuestion, 3000)
+        setTimeout(nextQuestion, 1000)
       }else {
         gameOver()
+        
       }
       
       return false
@@ -90,10 +96,14 @@ function nextQuestion() {
 }
 
 function gameOver(){
-  document.querySelector('.gameOver').innerText = `Game Over! \nYou scored ${wins} out of ${totalQuestions + 1}`
+  clock.stop()
+  document.querySelector('#input').removeEventListener('keyup', onEnter)
+  document.querySelector('.gameOver').innerText = `Game Over!`
+  document.querySelector('.scoreText').innerText =`You scored ${wins} out of ${totalQuestions + 1}`
   let end = Date.now()
   let timeTaken = (end - start) / 1000
-  document.querySelector('.time').innerText = `You took ${Math.round(timeTaken)} seconds`
+  document.querySelector('.timeTaken').innerText = `You took ${Math.round(timeTaken)} seconds`
+
 }
 
 function reload() {
@@ -104,3 +114,26 @@ function clearAnswerAndGuess(){
   document.querySelector('#guessResult').innerText = ''
   document.querySelector('#answer').innerText = ''
 }
+
+function Clock({ template }) {
+  
+  let timer;
+  let seconds = 0
+  function render() {
+    document.querySelector('.seconds').innerText = seconds;
+    seconds++
+  }
+
+  this.stop = function() {
+    clearInterval(timer);
+  };
+
+  this.start = function() {
+    render();
+    timer = setInterval(render, 1000);
+  };
+
+}
+
+
+
