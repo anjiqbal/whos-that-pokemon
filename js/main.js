@@ -28,6 +28,7 @@ function startGame(){
   document.querySelector('.wins').innerText = wins
   document.querySelector('.losses').innerText = losses
   clock.start()
+  document.querySelector('#start').removeEventListener('click', startGame)
 }
 
 
@@ -92,12 +93,13 @@ function checkAnswer() {
 function nextQuestion() {
   clearAnswerAndGuess()
   document.querySelector('img').classList.toggle('show')
-  setTimeout(fetchPokemon, 1000)
+  setTimeout(fetchPokemon, 500)
 }
 
 function gameOver(){
   clock.stop()
   document.querySelector('#input').removeEventListener('keyup', onEnter)
+  document.querySelector('#start').removeEventListener('click', startGame)
   document.querySelector('.gameOver').innerText = `Game Over!`
   document.querySelector('.scoreText').innerText =`You scored ${wins} out of ${totalQuestions + 1}`
   let end = Date.now()
