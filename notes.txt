@@ -1,9 +1,8 @@
 Code that displays current time in console - from js.info - classes chapter
 Refactor for timer
+
   function Clock({ template }) {
-  
     let timer;
-  
     function render() {
       let date = new Date();
   
@@ -37,6 +36,4 @@ Refactor for timer
   
   let clock = new Clock({template: 'h:m:s'});
   clock.start();
-  clock.stop(
-    
-  )
+  clock.stop()
