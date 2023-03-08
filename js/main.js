@@ -100,7 +100,6 @@ function clearAnswerAndGuess(){
 }
 
 function Clock() {
-  
   let timer;
   let seconds = 0
   function render() {
@@ -116,9 +115,7 @@ function Clock() {
     render();
     timer = setInterval(render, 1000);
   };
-
 }
-
 
 function reload() {
   location.reload()
