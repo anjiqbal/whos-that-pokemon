@@ -162,7 +162,7 @@ input:focus {
 /* ADDITIONAL STYLES
 /*******************************************/
 
-@media only screen and (min-width: 300px) and (max-width: 500px){
+/* @media only screen and (min-width: 300px) and (max-width: 500px){
 
   .gameSection {
     display: flex;
@@ -198,4 +198,4 @@ input:focus {
   }
 
   
-  }
+  } */
