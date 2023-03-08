@@ -1,4 +1,5 @@
-Code that runs a timer in console - from js.info - classes chapter
+Code that displays current time in console - from js.info - classes chapter
+Refactor for timer
   function Clock({ template }) {
   
     let timer;
